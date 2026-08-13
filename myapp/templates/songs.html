@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Songs - My Music
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    🎵 All Songs
+</h1>
+
+
+<div class="songs">
+
+    {% for song in songs %}
+
+    <div class="song-card">
+
+        {% if song.cover_image %}
+
+            <img
+                src="{{ song.cover_image.url }}"
+                alt="{{ song.title }}"
+            >
+
+        {% else %}
+
+            <div class="cover-placeholder">
+                🎵
+            </div>
+
+        {% endif %}
+
+
+        <h3>
+            {{ song.title }}
+        </h3>
+
+
+        <p class="artist">
+            {{ song.artist.name }}
+        </p>
+
+
+        {% if song.album %}
+
+        <p class="artist">
+            {{ song.album.name }}
+        </p>
+
+        {% endif %}
+
+
+        <!-- PLAY BUTTON -->
+
+        <button
+            class="play-button"
+            onclick="playSong(
+                '{{ song.audio_file.url }}',
+                '{{ song.title|escapejs }}',
+                '{{ song.artist.name|escapejs }}'
+            )"
+        >
+            ▶
+        </button>
+
+
+        <!-- ADD TO PLAYLIST -->
+
+        <div class="playlist-box">
+
+            <p class="playlist-title">
+                ➕ Add to Playlist
+            </p>
+
+
+            <form
+                method="POST"
+                action="{% url 'add_to_playlist' song.id %}"
+            >
+
+                {% csrf_token %}
+
+
+                <select name="playlist_id">
+
+                    <option value="">
+                        Select Playlist
+                    </option>
+
+                    {% for playlist in playlists %}
+
+                    <option value="{{ playlist.id }}">
+                        {{ playlist.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+
+                <p class="or-text">
+                    OR create new
+                </p>
+
+
+                <input
+                    type="text"
+                    name="new_playlist_name"
+                    placeholder="Playlist name"
+                >
+
+
+                <button
+                    type="submit"
+                    class="add-playlist-button"
+                >
+                    Add
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p>
+        No songs available.
+    </p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

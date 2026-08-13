@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{ playlist.name }} - My Music
+{% endblock %}
+
+
+{% block content %}
+
+<h1 class="page-title">
+    📚 {{ playlist.name }}
+</h1>
+
+
+<p class="artist">
+    {{ songs|length }} songs
+</p>
+
+
+<!-- DELETE PLAYLIST -->
+
+<form
+    method="POST"
+    action="{% url 'delete_playlist' playlist.id %}"
+    onsubmit="return confirm('Are you sure you want to delete this playlist?');"
+>
+
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="delete-playlist-button"
+    >
+        🗑️ Delete Playlist
+    </button>
+
+</form>
+
+
+<h2 style="margin-top: 30px;">
+    Songs
+</h2>
+
+
+<div class="songs">
+
+    {% for song in songs %}
+
+    <div class="song-card">
+
+        {% if song.cover_image %}
+
+            <img
+                src="{{ song.cover_image.url }}"
+                alt="{{ song.title }}"
+            >
+
+        {% else %}
+
+            <div class="cover-placeholder">
+                🎵
+            </div>
+
+        {% endif %}
+
+
+        <h3>
+            {{ song.title }}
+        </h3>
+
+
+        <p class="artist">
+            {{ song.artist.name }}
+        </p>
+
+
+        <!-- PLAY -->
+
+        <button
+            class="play-button"
+            onclick="playSong(
+                '{{ song.audio_file.url }}',
+                '{{ song.title|escapejs }}',
+                '{{ song.artist.name|escapejs }}'
+            )"
+        >
+            ▶
+        </button>
+
+
+        <!-- REMOVE SONG -->
+
+        <form
+            method="POST"
+            action="{% url 'remove_from_playlist' playlist.id song.id %}"
+        >
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="remove-button"
+            >
+                ❌ Remove
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% empty %}
+
+    <p>
+        This playlist has no songs yet.
+    </p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

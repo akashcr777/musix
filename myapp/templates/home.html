@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Home - My Music
+{% endblock %}
+
+
+{% block content %}
+
+<div class="top-bar">
+
+    <h1>
+        Recently Added
+    </h1>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔎 Search songs or artists..."
+        onkeyup="searchSongs()"
+    >
+
+</div>
+
+
+<div class="songs">
+
+    {% for song in songs %}
+
+    <div
+        class="song-card"
+        data-title="{{ song.title|lower }}"
+        data-artist="{{ song.artist.name|lower }}"
+    >
+
+        {% if song.cover_image %}
+
+            <img
+                src="{{ song.cover_image.url }}"
+                alt="{{ song.title }}"
+            >
+
+        {% else %}
+
+            <div class="cover-placeholder">
+                🎵
+            </div>
+
+        {% endif %}
+
+
+        <h3>
+            {{ song.title }}
+        </h3>
+
+
+        <p class="artist">
+            {{ song.artist.name }}
+        </p>
+
+
+        <button
+            class="play-button"
+            onclick="playSong(
+                '{{ song.audio_file.url }}',
+                '{{ song.title|escapejs }}',
+                '{{ song.artist.name|escapejs }}'
+            )"
+        >
+
+            ▶
+
+        </button>
+
+    </div>
+
+
+    {% empty %}
+
+    <p>
+        No songs uploaded yet.
+    </p>
+
+    {% endfor %}
+
+</div>
+
+
+<script>
+
+    function searchSongs() {
+
+        const searchText =
+            document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase();
+
+
+        const songCards =
+            document.querySelectorAll(
+                ".song-card"
+            );
+
+
+        songCards.forEach(function(card) {
+
+            const title =
+                card.dataset.title;
+
+            const artist =
+                card.dataset.artist;
+
+
+            if (
+                title.includes(searchText) ||
+                artist.includes(searchText)
+            ) {
+
+                card.style.display = "block";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    }
+
+</script>
+
+
+{% endblock %}

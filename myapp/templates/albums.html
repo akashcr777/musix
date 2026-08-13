@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Albums - My Music
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    💿 Albums
+</h1>
+
+<div class="songs">
+
+    {% for album in albums %}
+
+    <div class="song-card">
+
+        <!-- Check album cover first, then fallback to first song's cover in media/covers/ -->
+        {% if album.cover %}
+            <img 
+                src="{{ album.cover.url }}" 
+                alt="{{ album.name }}"
+            >
+        {% elif album.song_set.first.cover_image %}
+            <img 
+                src="{{ album.song_set.first.cover_image.url }}" 
+                alt="{{ album.name }}"
+            >
+        {% else %}
+            <div class="cover-placeholder">
+                💿
+            </div>
+        {% endif %}
+
+        <h3>
+            {{ album.name }}
+        </h3>
+
+        <p class="artist">
+            {{ album.artist.name }}
+        </p>
+
+    </div>
+
+    {% empty %}
+
+    <p>
+        No albums available.
+    </p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
