@@ -1,3 +1,4 @@
+HEAD
 # Database
 *.sqlite3
 
@@ -12,3 +13,8 @@ env/
 
 # Media files (optional, recommended if files are large)
 media/
+=======
+
+db.sqlite3
+__pycache__/
+11e549a (Untrack database and cache files)
