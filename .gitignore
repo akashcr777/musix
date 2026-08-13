@@ -1,0 +1,14 @@
+# Database
+*.sqlite3
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual Environment (if any)
+venv/
+env/
+.venv/
+
+# Media files (optional, recommended if files are large)
+media/
