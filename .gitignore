@@ -1,4 +1,3 @@
-HEAD
 # Database
 *.sqlite3
 
@@ -6,15 +5,12 @@ HEAD
 __pycache__/
 *.pyc
 
-# Virtual Environment (if any)
+# Virtual Environment
 venv/
 env/
 .venv/
+myenv/
 
-# Media files (optional, recommended if files are large)
+# Media files
 media/
-=======
-
-db.sqlite3
-__pycache__/
-11e549a (Untrack database and cache files)
+songs/
