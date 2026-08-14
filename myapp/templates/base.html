@@ -36,6 +36,7 @@
             top: 0;
             bottom: 80px;
             left: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -216,93 +217,172 @@
 
 
         .playlist-box {
-    margin-top: 15px;
-    padding-top: 12px;
-    border-top: 1px solid #333;
-}
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #333;
+        }
 
-.playlist-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+        .playlist-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-.playlist-box select,
-.playlist-box input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 8px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background: #333;
-    color: white;
-}
+        .playlist-box select,
+        .playlist-box input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            background: #333;
+            color: white;
+        }
 
-.or-text {
-    color: #888;
-    font-size: 12px;
-    margin: 3px 0;
-}
+        .or-text {
+            color: #888;
+            font-size: 12px;
+            margin: 3px 0;
+        }
 
-.add-playlist-button {
-    width: 100%;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
+        .add-playlist-button {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
 
-.add-playlist-button:hover {
-    transform: scale(1.02);
-}
-   
-   
-    .remove-button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    background: #333;
-    color: white;
-    cursor: pointer;
-}
+        .add-playlist-button:hover {
+            transform: scale(1.02);
+        }
+           
+        .remove-button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+        }
 
-.remove-button:hover {
-    background: #555;
-}
+        .remove-button:hover {
+            background: #555;
+        }
 
-.delete-playlist-button {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    background: #333;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-}
+        .delete-playlist-button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
-.delete-playlist-button:hover {
-    background: #555;
-}
+        .delete-playlist-button:hover {
+            background: #555;
+        }
 
-.remove-button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    background: #333;
-    color: white;
-    cursor: pointer;
-}
+        /* ==========================================
+           MOBILE RESPONSIVE STYLES (Screen width <= 768px)
+           ========================================== */
+        @media screen and (max-width: 768px) {
+            
+            body {
+                padding-bottom: 140px; /* Extra padding so player doesn't hide content */
+            }
 
-.remove-button:hover {
-    background: #555;
-}
+            /* 1. Turn Sidebar into a Top Horizontal Nav Bar */
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 15px;
+                bottom: auto;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .logo {
+                margin-bottom: 0;
+                font-size: 20px;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .menu-item {
+                margin: 5px 8px;
+                display: inline-block;
+            }
+
+            /* 2. Reset Content Margin and Width for full mobile screen */
+            .content {
+                margin-left: 0;
+                width: 100%;
+                padding: 15px;
+            }
+
+            /* 3. Top bar and Search input responsiveness */
+            .top-bar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            #searchInput {
+                width: 100%;
+            }
+
+            /* 4. Responsive Music Grid */
+            .songs {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+            }
+
+            .song-card img, .cover-placeholder {
+                height: 140px;
+            }
+
+            /* 5. Compact Bottom Music Player */
+            .player {
+                height: auto;
+                flex-wrap: wrap;
+                padding: 10px 15px;
+            }
+
+            .now-playing {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+
+            .controls {
+                width: 70%;
+                margin: 0 auto;
+            }
+
+            .controls button {
+                font-size: 20px;
+                margin: 0 10px;
+            }
+
+            .volume {
+                width: 30%;
+            }
+
+            .volume input {
+                width: 60px;
+            }
+        }
 
     </style>
 
